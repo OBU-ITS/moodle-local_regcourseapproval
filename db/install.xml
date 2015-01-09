@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/regcourseapproval/db" VERSION="20140707" COMMENT="XMLDB file for Moodle local/regcourseapproval"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="local_regcourseapproval" COMMENT="Stores details of invitations and enrolments for users to courses">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" NEXT="course"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Course on which user is enrolled" PREVIOUS="id" NEXT="userid"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="The invited user" PREVIOUS="course" NEXT="enrolled"/>
+        <FIELD NAME="enrolled" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Whether enrolled on this course" PREVIOUS="userid" NEXT="invitationdate"/>
+        <FIELD NAME="invitationdate" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Date invitation was sent out (entry created)" PREVIOUS="enrolled" NEXT="enrolleddate"/>
+        <FIELD NAME="enrolleddate" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Date of enrolment" PREVIOUS="invitationdate" NEXT="unenrolledate"/>
+        <FIELD NAME="unenrolledate" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Date used unenrolled" PREVIOUS="enrolleddate" NEXT="approver"/>
+        <FIELD NAME="approver" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="User id of the approver if set" PREVIOUS="unenrolledate" NEXT="email"/>
+        <FIELD NAME="email" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Invitee's email address" PREVIOUS="approver"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="course" UNIQUE="false" FIELDS="course" NEXT="userid"/>
+        <INDEX NAME="userid" UNIQUE="false" FIELDS="userid" PREVIOUS="course" NEXT="email"/>
+        <INDEX NAME="email" UNIQUE="false" FIELDS="email" PREVIOUS="userid"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
