@@ -46,8 +46,7 @@ $form_submitted = false;
 $valid_data = false;
 
 $PAGE->set_url('/auth/regapproval/confirm.php');
-// $PAGE->set_context(get_context_instance(CONTEXT_SYSTEM));
-$PAGE->set_context(context_course::instance(CONTEXT_SYSTEM));
+$PAGE->set_context(context_system::instance());
 
 $usersecret = "";
 $username = "";
@@ -74,7 +73,7 @@ if ($data) {
     $usersecret = $dataelements[0];
     $username   = $dataelements[1];
     $courseid  =  $dataelements[2];
-    
+	
     if ($courseid) {
         $COURSE = $DB->get_record('course', array('id'=>$courseid));
     }
@@ -92,6 +91,14 @@ if ($data) {
     
     $valid_data = true;
     
+}
+
+if ($courseid) {
+	$PAGE->set_context(context_course::instance($courseid));
+	$PAGE->set_pagelayout('course');
+} else {
+	$PAGE->set_context(context_system::instance());
+	$PAGE->set_pagelayout('standard');
 }
 
 // Set up the form - either a real form to show or a dummy one to gather params (which does seem dummy...)
