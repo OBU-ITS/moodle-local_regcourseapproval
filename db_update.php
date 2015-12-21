@@ -33,17 +33,15 @@
  */
 
 function insert_invitation($cid, $user_email, $email_approver) {
-   
     global $DB;
     
     $record = new stdClass();
-    $record->course         = $cid;
-    $record->email          = $user_email;
-    $record->approver       = $email_approver;
+    $record->course = $cid;
+    $record->email = strtolower($user_email); // We use the lowercase email address to simplify comparisons
+    $record->approver = $email_approver;
     $record->invitationdate = time();
     
     $DB->insert_record('local_regcourseapproval', $record, false);    
-    
 }
 
 /** check that a given email/course combination have been invited to apply - if not we can reject them
@@ -53,22 +51,18 @@ function insert_invitation($cid, $user_email, $email_approver) {
  * @param type $email_approver
  */
 
-function exists_invitation($cid, $user_email, $approver_id=0) {
-    
+function exists_invitation($cid, $user_email, $approver_id = 0) {
     global $DB;
     
     if ($approver_id) {
-        $result = $DB->record_exists('local_regcourseapproval',array('course' => $cid, 'email' => $user_email, 'approver' => $approver_id));
+        $result = $DB->record_exists('local_regcourseapproval', array('course' => $cid, 'email' => strtolower($user_email), 'approver' => $approver_id));
     }
     else {
-        $result = $DB->record_exists('local_regcourseapproval',array('course' => $cid, 'email' => $user_email));
+        $result = $DB->record_exists('local_regcourseapproval', array('course' => $cid, 'email' => strtolower($user_email)));
     }
-    
-
-     
+      
     return $result;
 }
-
 
 
 /** Retrieve a single invitation record given course id and user email
@@ -80,17 +74,15 @@ function exists_invitation($cid, $user_email, $approver_id=0) {
  */
 
 function retrieve_invitation_by_email($course_id, $user_email) {
-    
     global $DB;
       
-    $results = $DB->get_records('local_regcourseapproval',array('course' => $course_id, 'email' => $user_email, 'enrolled' => false));
+    $results = $DB->get_records('local_regcourseapproval', array('course' => $course_id, 'email' => strtolower($user_email), 'enrolled' => false));
    
     foreach ($results as $this_result) {
         $result = $this_result;
     }
     
     return $result;
-       
 }
 
 
@@ -101,13 +93,11 @@ function retrieve_invitation_by_email($course_id, $user_email) {
  */
 
 function retrieve_invitation($course_id, $user_id) {
-    
     global $DB;
       
-    $result = $DB->get_record('local_regcourseapproval',array('course' => $course_id, 'userid' => $user_id));
+    $result = $DB->get_record('local_regcourseapproval', array('course' => $course_id, 'userid' => $user_id));
        
     return $result;
-       
 }
 
 
@@ -117,15 +107,13 @@ function retrieve_invitation($course_id, $user_id) {
  */
 
 function record_user($inv_id, $user_id) {
-   
     global $DB; 
     
     $record = new stdClass();
-    $record->id             = $inv_id;
-    $record->userid         = $user_id;
+    $record->id = $inv_id;
+    $record->userid = $user_id;
        
     $result = $DB->update_record('local_regcourseapproval', $record);
-      
 }
 
 
@@ -135,31 +123,12 @@ function record_user($inv_id, $user_id) {
  */
 
 function record_enrolment($inv_id) {
-   
     global $DB; 
     
     $record = new stdClass();
-    $record->id             = $inv_id;
-    $record->enrolled       = 1;
-    $record->enrolleddate   = time();    
+    $record->id = $inv_id;
+    $record->enrolled = 1;
+    $record->enrolleddate = time();    
     
     $result = $DB->update_record('local_regcourseapproval', $record);
-      
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
