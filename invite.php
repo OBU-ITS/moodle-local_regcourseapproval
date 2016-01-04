@@ -133,8 +133,7 @@ echo $OUTPUT->footer();
  */
 
 function send_invitation_emails($cid, $email_subject, $email_text, $email_approver, $recipients) {
-
-    global $DB;
+    global $DB, $USER;
     
     $count = 0;
     $max = 250;
@@ -154,7 +153,6 @@ function send_invitation_emails($cid, $email_subject, $email_text, $email_approv
     $email_text = insert_email_link($email_text, $cid, $id_approver);
     
     $email_text_html = text_to_html($email_text, false, false, true); 
-    // $supportuser = generate_email_supportuser();
     $supportuser = core_user::get_support_user();
  
     foreach ($recipients as $recipient) {
@@ -173,7 +171,7 @@ function send_invitation_emails($cid, $email_subject, $email_text, $email_approv
         $recipientUser->alternatename = '';        
         
         if ($count < $max) {
-            $ok = email_to_user($recipientUser, $supportuser, $email_subject, $email_text, $email_text_html);
+            $ok = email_to_user($recipientUser, $supportuser, $email_subject, $email_text, $email_text_html, '', '', true, $USER->email);
                         
             if ($ok) {
                 $successes[$count] = $recipient;
