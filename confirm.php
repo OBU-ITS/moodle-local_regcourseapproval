@@ -259,13 +259,14 @@ echo $OUTPUT->footer();
  * Send the confirmation email
  * 
  * @global type $CFG
+ * @global type $USER
  * @global type $COURSE
  * @param type $user_applicant the user being confirmed 
  * @return void
  */
 
 function send_confirmation_email_user($user_applicant) {
-    global $CFG, $COURSE;
+    global $CFG, $USER, $COURSE;
 
     $site = get_site();
     // $supportuser = generate_email_supportuser();
@@ -290,5 +291,5 @@ function send_confirmation_email_user($user_applicant) {
 
     //directly email rather than using the messaging system to ensure its not routed to a popup or jabber
 
-    return email_to_user($user_applicant, $supportuser, $subject, $message, $messagehtml);
+    return email_to_user($user_applicant, $supportuser, $subject, $message, $messagehtml, '', '', true, $USER->email);
 }
