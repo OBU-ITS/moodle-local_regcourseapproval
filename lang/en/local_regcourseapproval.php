@@ -79,6 +79,9 @@ Hello {$a->firstname},
 
 Welcome to Oxford Brookes University! Your account and enrolment has been approved.
 
+Using the username and password you specified in the enrolment process, you will now be able to log in to our learning environment, Moodle, at
+https://moodle.brookes.ac.uk/.
+
 We\'re delighted you have joined us.
 
 Thank you,
