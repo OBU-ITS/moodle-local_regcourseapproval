@@ -29,8 +29,9 @@ if (!defined('MOODLE_INTERNAL')) {
     die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
 }
 
-require_once($CFG->libdir.'/authlib.php');
-require_once($CFG->dirroot.'/user/profile/lib.php');
+require_once($CFG->libdir . '/authlib.php');
+require_once($CFG->dirroot . '/user/lib.php');
+require_once($CFG->dirroot . '/user/profile/lib.php');
 require_once('db_update.php');
 require_once('lib.php');
 
@@ -118,10 +119,9 @@ class auth_approval extends auth_plugin_base {
         
         $user->password = hash_internal_user_password($user->password);
         $user->auth = $this->authtype;
-        
-        $user->id = $DB->insert_record('user', $user);
-        
-        /// Save any custom profile field information (unneeded step?)
+        $user->id = user_create_user($user, false);
+		
+        // Save any custom profile field information (unneeded step?)
         profile_save_data($user);        
        
         // Reload the user - why? Done in original so copied here
@@ -352,7 +352,6 @@ class auth_approval extends auth_plugin_base {
         $return = false;
         
         $site = get_site();
-        // $supportuser = generate_email_supportuser();
         $supportuser = core_user::get_support_user();
     
         $data = new stdClass();
@@ -397,7 +396,6 @@ class auth_approval extends auth_plugin_base {
         $return = false;
         
         $site = get_site();
-        // $supportuser = generate_email_supportuser();
         $supportuser = core_user::get_support_user();
     
         $data = new stdClass();

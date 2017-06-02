@@ -85,7 +85,6 @@ if ($data) {
     $useremail = $user_applicant->email;
     $user_confirmed = $user_applicant->confirmed; 
     
-    // $context = get_context_instance(CONTEXT_COURSE, $courseid, MUST_EXIST);
     $context = context_course::instance($COURSE->id, MUST_EXIST);
     $user_enrolled = is_enrolled($context, $user_applicant->id, '', true);
     
@@ -269,7 +268,6 @@ function send_confirmation_email_user($user_applicant) {
     global $CFG, $USER, $COURSE;
 
     $site = get_site();
-    // $supportuser = generate_email_supportuser();
     $supportuser = core_user::get_support_user();
 
     $data = new stdClass();
