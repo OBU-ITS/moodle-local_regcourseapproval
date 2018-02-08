@@ -43,6 +43,7 @@ require_capability('enrol/manual:enrol', $context);
 // HTTPS is required
 // $PAGE->https_required();
 
+$PAGE->set_pagelayout('standard');
 $PAGE->set_url('/local/regcourseapproval/invite.php');
 $PAGE->set_context(context_system::instance());
 
@@ -63,8 +64,9 @@ else if ($form_data = $mform_invite->get_data()) {
     
     $cid = $form_data->id;
     $email_subject = $form_data->emailsubject;
-    $email_approver = $form_data->emailapprover;
     $email_text = $form_data->emailtext;
+    $email_approver = $form_data->emailapprover;
+    $auto_confirm = $form_data->auto_confirm;
     $recipients = $mform_invite->get_file_content('invitedemailsfile');
     
     // check that the approver email entered, if any, was valid - if not, report an error 
@@ -86,7 +88,7 @@ else if ($form_data = $mform_invite->get_data()) {
         $recipient_array = split_form_data($recipients);
 
         // Here is where the emails actually get sent
-        $successes = send_invitation_emails($cid, $email_subject, $email_text, $email_approver, $recipient_array);
+        $successes = send_invitation_emails($cid, $email_subject, $email_text, $email_approver, $auto_confirm, $recipient_array);
         $numberSent = count($successes);
 
         $message = "$numberSent email" . ($numberSent == 1 ? "" : "s") . " successfully transmitted.";
@@ -96,7 +98,6 @@ else if ($form_data = $mform_invite->get_data()) {
             $message .= "<br>$success";
         }
     }
-    
 }
 
 // $PAGE->verify_https_required();
@@ -120,7 +121,6 @@ else {
 echo $OUTPUT->footer();
 
 
-
 /** 
  * Send out emails to invitees containing the sign up link. Max this to something sensible (eg 250)
  * 
@@ -128,11 +128,12 @@ echo $OUTPUT->footer();
  * @param type $email_subject
  * @param type $email_text
  * @param type $email_approver
+ * @param type $auto_confirm
  * @param type $recipients
  * @return int number sent
  */
 
-function send_invitation_emails($cid, $email_subject, $email_text, $email_approver, $recipients) {
+function send_invitation_emails($cid, $email_subject, $email_text, $email_approver, $auto_confirm, $recipients) {
     global $DB, $USER;
     
     $count = 0;
@@ -178,7 +179,7 @@ function send_invitation_emails($cid, $email_subject, $email_text, $email_approv
                 $count++; 
                 
                 // and update the database with details of the invitation sent
-                insert_invitation($cid, $recipient, $id_approver);        
+                insert_invitation($cid, $recipient, $id_approver, $auto_confirm);        
             }
         }    
     } 

@@ -14,7 +14,8 @@
         <FIELD NAME="enrolleddate" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Date of enrolment" PREVIOUS="invitationdate" NEXT="unenrolledate"/>
         <FIELD NAME="unenrolledate" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Date used unenrolled" PREVIOUS="enrolleddate" NEXT="approver"/>
         <FIELD NAME="approver" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="User id of the approver if set" PREVIOUS="unenrolledate" NEXT="email"/>
-        <FIELD NAME="email" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Invitee's email address" PREVIOUS="approver"/>
+        <FIELD NAME="email" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Invitee's email address" PREVIOUS="approver" NEXT="auto_confirm"/>
+        <FIELD NAME="autoconfirm" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Zero or limit (weeks)" PREVIOUS="email"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

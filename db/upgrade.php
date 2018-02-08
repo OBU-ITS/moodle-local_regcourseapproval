@@ -39,12 +39,12 @@ function xmldb_local_regcourseapproval_upgrade($oldversion = 0) {
         $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
         $table->add_field('course', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
         $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
-        $table->add_field('email', XMLDB_TYPE_CHAR, '255', null, null, null, null);
         $table->add_field('enrolled', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0');
         $table->add_field('invitationdate', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
         $table->add_field('enrolleddate', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
         $table->add_field('unenrolledate', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
         $table->add_field('approver', XMLDB_TYPE_INTEGER, '10', null, null, null, null);
+        $table->add_field('email', XMLDB_TYPE_CHAR, '255', null, null, null, null);
 
         // Adding keys to table local_regcourseapproval
         $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
@@ -63,6 +63,18 @@ function xmldb_local_regcourseapproval_upgrade($oldversion = 0) {
         upgrade_plugin_savepoint(true, 2014070711, 'local', 'regcourseapproval');
     }
     
+	if ($oldversion < 2017120700) {
+
+		// Define the additional field to be added to local_regcourseapproval
+		$table = new xmldb_table('local_regcourseapproval');
+		$field = new xmldb_field('autoconfirm', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0', 'email');
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+
+		// regcourseapproval savepoint reached
+		upgrade_plugin_savepoint(true, 2017120700, 'local', 'regcourseapproval');
+    }
     
     return $result;
 }

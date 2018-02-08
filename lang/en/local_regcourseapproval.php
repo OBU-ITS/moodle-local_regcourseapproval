@@ -67,6 +67,7 @@ Oxford Brookes Moodle Admin
 $string['subject_label'] = 'Subject of the email:';
 $string['text_label'] = 'Text of the email:';
 $string['approver_label'] = 'Approver\'s email (must be able to enrol students; defaults to module leader if blank):';
+$string['auto_confirm'] = 'Auto confirm limit (weeks):';
 $string['invitee_label_1'] = '<b>Either</b>: Invitees (enter new line separated list):';
 $string['invitee_label_2'] = '<b>Or</b>: Invitees (enter file):';  
 

@@ -35,7 +35,7 @@ class invite_form extends moodleform {
         $data = new stdClass();
         $data->coursename = $this->_customdata['coursename'];
         $data->linkplaceholder = get_string('linkplaceholder', 'local_regcourseapproval');
-        
+		
         $mform->addElement('hidden', 'id');
         $mform->setType('id', PARAM_NOTAGS);        
         $mform->setDefault('id',$this->_customdata['courseid']);
@@ -55,6 +55,8 @@ class invite_form extends moodleform {
         
         $mform->addElement('text', 'emailapprover', get_string('approver_label', 'local_regcourseapproval'), 'maxsize="250" size="80"');        
         $mform->setType('emailapprover', PARAM_NOTAGS);
+		
+		$mform->addElement('select', 'auto_confirm', get_string('auto_confirm', 'local_regcourseapproval'), array(0, 1, 2, 3, 4), null);
 
         $mform->addElement('textarea', 'invitedemails', get_string('invitee_label_1', 'local_regcourseapproval'), 'rows="10" cols="80"');
         $mform->setType('invitedemails', PARAM_NOTAGS);
@@ -65,5 +67,4 @@ class invite_form extends moodleform {
 
         $this->add_action_buttons(false, get_string('invitation_button', 'local_regcourseapproval'));
     }
-
 }

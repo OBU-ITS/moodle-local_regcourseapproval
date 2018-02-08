@@ -32,13 +32,14 @@
  * @param type $email_approver the id of the course approver (usually the leader)
  */
 
-function insert_invitation($cid, $user_email, $email_approver) {
+function insert_invitation($cid, $user_email, $id_approver, $auto_confirm) {
     global $DB;
     
     $record = new stdClass();
     $record->course = $cid;
     $record->email = strtolower($user_email); // We use the lowercase email address to simplify comparisons
-    $record->approver = $email_approver;
+    $record->approver = $id_approver;
+	$record->autoconfirm = $auto_confirm;
     $record->invitationdate = time();
     
     $DB->insert_record('local_regcourseapproval', $record, false);    
