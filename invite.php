@@ -159,7 +159,7 @@ function send_invitation_emails($cid, $email_subject, $email_text, $email_approv
     foreach ($recipients as $recipient) {
           
         // Moodle requires a User to send emails to, not an email addresss... So make a phoney user (dumb...)
-        $recipientUser = new Object();
+        $recipientUser = new stdClass();
         $recipientUser->email = $recipient;
         $recipientUser->firstname = '';
         $recipientUser->lastname = '';
