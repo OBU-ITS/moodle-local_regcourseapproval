@@ -24,6 +24,16 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['privacy:metadata:local_regcourseapproval'] = 'Information about an invitation to enroll on a course. This includes when a user has chosen to enroll or unenroll.';
+$string['privacy:metadata:local_regcourseapproval:course'] = 'The course onto which the user has been invited.';
+$string['privacy:metadata:local_regcourseapproval:userid'] = 'The invited user.';
+$string['privacy:metadata:local_regcourseapproval:enrolled'] = 'Whether user is enrolled on the course or not.';
+$string['privacy:metadata:local_regcourseapproval:enrolleddate'] = 'Date of user\'s enrolment (if any).';
+$string['privacy:metadata:local_regcourseapproval:unenrolledate'] = 'Date of user\'s unenrolment (if any).';
+$string['privacy:metadata:local_regcourseapproval:email'] = 'User\'s email address.';
+$string['privacy:regcourseapprovals'] = 'Course registrations with approval';
+$string['privacy:regcourseapproval'] = 'Registration {$a}';
+
 $string['pluginname'] = 'regcourseapproval';
 $string['title'] = 'Registration with approval';
 $string['missingcourseid'] = 'Course ID not provided';

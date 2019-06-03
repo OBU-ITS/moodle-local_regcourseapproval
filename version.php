@@ -16,25 +16,24 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Verison info
+ * Version info
  *
  * @package    regcourseapproval
  * @category   local
- * @copyright  2015, Oxford Brookes University {@link http://www.brookes.ac.uk/}
+ * @copyright  2019, Oxford Brookes University {@link http://www.brookes.ac.uk/}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2018062700;
+$plugin->version = 2019031800;
 
-$plugin->requires = 2012120301;//Optional - minimum version number of Moodle that this plugin requires
-//(Moodle 1.9 = 2007101509; Moodle 2.0 = 2010112400; Moodle 2.1 = 2011070100; Moodle 2.2 = 2011120100; Moodle 2.4 = 2012120301)
+$plugin->requires = 2018051701; // Minimum version number of Moodle that this plugin requires (3.5.1)
 
 $plugin->component = 'local_regcourseapproval'; // Full name of the plugin (used for diagnostics): plugintype_pluginname
 
 $plugin->maturity = MATURITY_STABLE;//Optional - how stable the plugin is:
 //MATURITY_ALPHA, MATURITY_BETA, MATURITY_RC, MATURITY_STABLE (Moodle 2.0 and above)
 
-$plugin->release = 'v1.1.1';//Optional - Human-readable version name
+$plugin->release = 'v1.1.2';//Optional - Human-readable version name
 ?>
