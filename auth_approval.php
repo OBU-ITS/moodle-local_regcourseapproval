@@ -145,8 +145,6 @@ class auth_approval extends auth_plugin_base {
 
         global $CFG, $DB, $COURSE;        
         
-        events_trigger('user_created', $user);
-
         // Now get the course's module leader ('teacher' in standard moodle - config settings determine the value to use)
         // or fall back on admin if not present
         // The course ID is passed in

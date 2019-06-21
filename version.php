@@ -26,7 +26,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2019031800;
+$plugin->version = 2019050600;
 
 $plugin->requires = 2018051701; // Minimum version number of Moodle that this plugin requires (3.5.1)
 
@@ -35,5 +35,5 @@ $plugin->component = 'local_regcourseapproval'; // Full name of the plugin (used
 $plugin->maturity = MATURITY_STABLE;//Optional - how stable the plugin is:
 //MATURITY_ALPHA, MATURITY_BETA, MATURITY_RC, MATURITY_STABLE (Moodle 2.0 and above)
 
-$plugin->release = 'v1.1.2';//Optional - Human-readable version name
+$plugin->release = 'v1.1.3';//Optional - Human-readable version name
 ?>

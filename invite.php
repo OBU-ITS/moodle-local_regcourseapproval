@@ -40,9 +40,6 @@ $context = context_course::instance($COURSE->id, MUST_EXIST);
 require_capability('enrol/manual:enrol', $context);
 
 
-// HTTPS is required
-// $PAGE->https_required();
-
 $PAGE->set_pagelayout('standard');
 $PAGE->set_url('/local/regcourseapproval/invite.php');
 $PAGE->set_context(context_system::instance());
@@ -99,8 +96,6 @@ else if ($form_data = $mform_invite->get_data()) {
         }
     }
 }
-
-// $PAGE->verify_https_required();
 
 $nav = get_string('invite_users_nav', 'local_regcourseapproval');
 $title = get_string('invite_users_title', 'local_regcourseapproval');
