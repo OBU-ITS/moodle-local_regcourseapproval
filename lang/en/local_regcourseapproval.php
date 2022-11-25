@@ -153,14 +153,14 @@ $string['alreadyconfirmed'] = 'This username is already registered.<br>';
 $string['userenrolled'] = 'This user has been successfuly enrolled on course {$a->course_fullname}.<br>';
 
 
-$string['invite_users_nav'] = 'Invite users';
-$string['invite_users_title'] = 'Invite users';
+$string['invite_users_nav'] = 'Invite external users';
+$string['invite_users_title'] = 'Invite external users';
 
 $string['invalidapproveremail'] = 'Please enter a valid email address for the registration approver (must be a registered Moodle user with sufficient privileges - leave blank to accept default)';
 $string['missingemailtext'] = 'Please enter the text for the covering email';
 $string['missingemailsubject'] = 'Please enter the subject for the covering email';
 
-$string['invite_formheader'] = 'To invite users to enrol on the course {$a->coursename} please modify the subject and text of the invitation email below as required (<strong>NB do not alter the \'do not edit\' line</strong>),
+$string['invite_formheader'] = 'To invite external users to enrol on the course {$a->coursename} please modify the subject and text of the invitation email below as required (<strong>NB do not alter the \'do not edit\' line</strong>),
 and either paste recipient email addresses (new line separated) into the first box, or drop a file of email addresses into the second (max 250 at one go).    
 
 Then click \'Send invitations\' to send out the emails.
