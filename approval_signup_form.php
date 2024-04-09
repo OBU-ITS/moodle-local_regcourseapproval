@@ -31,31 +31,31 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->libdir.'/formslib.php');
 require_once($CFG->dirroot.'/user/profile/lib.php');
 
-/** Moodleform for the initial user (self) registration - largely copied from equivalent in auth 
- * 
+/** Moodleform for the initial user (self) registration - largely copied from equivalent in auth
+ *
  */
 
 class approval_signup_form extends moodleform {
     function definition() {
         global $USER, $CFG;
-        
+
         $mform = $this->_form;
-        
+
         $data = new stdClass();
         $data->course_fullname = $this->_customdata['course_fullname'];
         $mform->addElement('header', '', $this->_customdata['course_fullname']);
 
         $mform->addElement('html', '<br>' . get_string('formheader', 'local_regcourseapproval', $data) . '<br>');
-       
+
         // Hidden value for approver id - optional
         $mform->addElement('hidden', 'uid');
         $mform->setType('uid', PARAM_NOTAGS);
         $mform->setDefault('uid',$this->_customdata['uid']);
-               
+
         $mform->addElement('hidden', 'courseid');
         $mform->setType('courseid', PARAM_NOTAGS);
         $mform->setDefault('courseid',$this->_customdata['course_id']);
-        $mform->addRule('courseid', get_string('missingcourseid', 'local_regcourseapproval'), 'required', null, 'server');        
+        $mform->addRule('courseid', get_string('missingcourseid', 'local_regcourseapproval'), 'required', null, 'server');
 
         $mform->addElement('text', 'username', get_string('username'), 'maxlength="100" size="12"');
         $mform->setType('username', PARAM_NOTAGS);
@@ -90,12 +90,12 @@ class approval_signup_form extends moodleform {
             $mform->addElement('text', 'firstname', get_string('firstname'), 'maxlength="100" size="30"');
             $mform->addElement('text', 'lastname',  get_string('lastname'),  'maxlength="100" size="30"');
         }
-         * 
+         *
          */
 
         $mform->addElement('text', 'firstname', get_string('firstname'), 'maxlength="100" size="30"');
         $mform->addElement('text', 'lastname',  get_string('lastname'),  'maxlength="100" size="30"');
-        
+
         $mform->setType('firstname', PARAM_TEXT);
         $mform->addRule('firstname', get_string('missingfirstname'), 'required', null, 'server');
 
@@ -141,23 +141,23 @@ class approval_signup_form extends moodleform {
     }
 
     /** Form filter
-     * 
+     *
      */
-    
+
     function definition_after_data(){
         $mform = $this->_form;
         $mform->applyFilter('username', 'trim');
     }
 
     /** Form validaiton (copied direct from original auth)
-     * 
+     *
      * @global type $CFG
      * @global type $DB
      * @param type $data
      * @param type $files
      * @return type
      */
-    
+
     function validation($data, $files) {
         global $CFG, $DB;
         $errors = parent::validation($data, $files);
@@ -165,7 +165,7 @@ class approval_signup_form extends moodleform {
         // Use custom auth, not plugin
         // $authplugin = get_auth_plugin($CFG->registerauth);
         $authplugin = new auth_approval();
-        
+
         if ($DB->record_exists('user', array('username'=>$data['username'], 'mnethostid'=>$CFG->mnet_localhost_id))) {
             $errors['username'] = get_string('usernameexists');
         } else {
@@ -194,7 +194,7 @@ class approval_signup_form extends moodleform {
             $errors['email'] = get_string('invalidemail');
 
         } else if ($DB->record_exists('user', array('email'=>$data['email']))) {
-            $errors['email'] = get_string('emailexists').' <a href="forgot_password.php">'.get_string('newpassword').'?</a>';
+            $errors['email'] = get_string('emailexists').' <a href="/login/forgot_password.php">'.get_string('newpassword').'?</a>';
         }
         if (empty($data['email2'])) {
             $errors['email2'] = get_string('missingemail');
@@ -239,7 +239,7 @@ class approval_signup_form extends moodleform {
      * Returns whether or not the captcha element is enabled, and the admin settings fulfil its requirements.
      * @return bool
      */
-    
+
     function signup_captcha_enabled() {
         global $CFG;
         return !empty($CFG->recaptchapublickey) && !empty($CFG->recaptchaprivatekey) && get_config('auth/email', 'recaptcha');
