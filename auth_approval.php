@@ -44,7 +44,7 @@ class auth_approval extends auth_plugin_base {
     /**
      * Constructor.
      */
-    function auth_approval() {
+    function __construct() {
         
         global $COURSE;
         
