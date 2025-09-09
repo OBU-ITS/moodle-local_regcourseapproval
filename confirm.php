@@ -122,7 +122,7 @@ if ($form_data = $mform_confirm->get_data()) {
 
 // Not allowed (error)
 else if (!$authplugin->can_confirm()) {
-    print_error('cannotusepage2');
+    throw new \moodle_exception('cannotusepage2');
 }
 
 // Form submitted - so gather params and action them (ie enrol the user etc)
@@ -155,7 +155,7 @@ if ($form_submitted) {
     // (Re)fetch the user (otiose, but double sure - and fail if it fails)
     if (!$user_applicant = get_complete_user_data('username', $username)) {
         $ok = false;
-        print_error('cannotfinduser', '', '', s($username));
+        throw new \moodle_exception('cannotfinduser', '', '', s($username));
     }    
     
     // So now (iff we have a course ID, which for now we always will) we also enrol the user in that course

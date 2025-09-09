@@ -52,7 +52,7 @@ if (!$approver_id) {
 $COURSE = $DB->get_record('course', array('id'=>$course_id));
 
 if (!$course_id || !$COURSE) {
-	print_error('invalidcoursemodule');
+    throw new \moodle_exception('invalidcoursemodule');
 }
 
 // Call custom version of user_signup that handles the emailing (as if it was an authorisation plugin - but not site wide)
@@ -60,7 +60,7 @@ if (!$course_id || !$COURSE) {
 $authplugin = new auth_approval();
 
 if (!$authplugin->can_signup()) {
-	print_error('notlocalisederrormessage', 'error', '', 'Sorry, you may not use this page.');
+    throw new \moodle_exception('notlocalisederrormessage', 'error', '', 'Sorry, you may not use this page.');
 }
 
 $PAGE->set_url('/local/regcourseapproval/signup.php');

@@ -191,11 +191,11 @@ class auth_approval extends auth_plugin_base {
         }
         
         if (! $this->send_confirmation_email_student($user, $this->coursename, $approver_user, $is_existing_user)) {
-            print_error('regapprovalnoemail','local_regcourseapproval');
+            throw new \moodle_exception('regapprovalnoemail','local_regcourseapproval');
         }        
         
         if (! $this->send_confirmation_email_leader($user, $this->coursename, $approver_user, $is_existing_user)) {
-            print_error('regapprovalnoemail','local_regcourseapproval');
+            throw new \moodle_exception('regapprovalnoemail','local_regcourseapproval');
         }
 
         if ($notify) {
