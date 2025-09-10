@@ -35,5 +35,5 @@ $plugin->component = 'local_regcourseapproval'; // Full name of the plugin (used
 $plugin->maturity = MATURITY_STABLE;//Optional - how stable the plugin is:
 //MATURITY_ALPHA, MATURITY_BETA, MATURITY_RC, MATURITY_STABLE (Moodle 2.0 and above)
 
-$plugin->release = 'v1.2.0.0';//Optional - Human-readable version name
+$plugin->release = '1.2.0.0';//Optional - Human-readable version name
 ?>
