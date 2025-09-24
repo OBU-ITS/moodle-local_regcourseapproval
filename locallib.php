@@ -51,7 +51,7 @@ function enrol_user($username, $course_id, $duration = 365) {
 	// (Re)fetch the user (otiose, but double sure - and fail if it fails)
 	if (!$user = get_complete_user_data('username', $username)) {
 		$ok = false;
-		print_error('cannotfinduser', '', '', s($username));
+        throw new \moodle_exception('cannotfinduser', '', '', s($username));
 	}    
 
 	// We use only manual enrol plugin here, if it is disabled (which it won't be) no enrol is done (so it had better be enabled)
